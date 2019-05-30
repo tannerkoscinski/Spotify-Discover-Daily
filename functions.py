@@ -242,14 +242,19 @@ def excluder(username):
     users.to_csv('usernames.csv', index=False)
 
 
-def authorize(username, response, scope=SCOPE, client_id=CLIENT_ID,
+def authorize(response, scope=SCOPE, client_id=CLIENT_ID,
               client_secret=CLIENT_SECRET, redirect_uri=REDIRECT_URI):
     """This function authorizes the user."""
-    cache_path = '.cache-' + username
     sp_oauth = oauth2.SpotifyOAuth(client_id, client_secret, redirect_uri,
-                                   scope=scope, cache_path=cache_path)
+                                   scope=scope, cache_path='.cache-temp')
     code = sp_oauth.parse_response_code(response)
     sp_oauth.get_access_token(code)
+    token = util.prompt_for_user_token('temp', scope, client_id,
+                                       client_secret, redirect_uri)
+    spotify_object = spotipy.Spotify(auth=token)
+    username = spotify_object.current_user()['id']
+    open('.cache-' + username, 'w').write(open('.cache-temp', 'r').read())
+    return username
 
 
 def logger(username, event):

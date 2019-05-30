@@ -14,7 +14,7 @@ Due to a current issue with Spotify, in some rare cases, a song will continue to
 
 These playlists update daily.
 
-To manually update Discovery to not include the songs you just listened to, just come back to the web app and re-enter your Spotify username.
+To manually update Discovery to not include the songs you just listened to, just come back to the web app and click the button again.
 
 You must listen to at least 30 seconds of a song for it to count as a listen.
 
