@@ -172,6 +172,7 @@ def releaser(username, spotify_object):
                                    columns=['trackid', 'track', 'album',
                                             'artist', 'release'])
             data = data.append(row)
+    data = data.drop_duplicates(subset=['track', 'artist'])
     data.to_csv(username + '_releaser.csv', index=False)
 
 

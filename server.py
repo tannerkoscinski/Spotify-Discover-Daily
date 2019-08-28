@@ -31,7 +31,7 @@ def flask_app():
         logger(username, 'attempt')
         spotify_object = initializer(username)
         history(username, spotify_object)
-        if username in usernames:
+        if username in list(usernames['username']):
             remover(username)
             discovery(username, spotify_object)
             follower(username, spotify_object)
