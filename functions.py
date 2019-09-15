@@ -160,8 +160,8 @@ def releaser(username, spotify_object):
                                        columns=['albumid', 'release_date',
                                                 'album', 'artist'])
                 newalbums = newalbums.append(row)
-    newalbums = newalbums.sort_values(by='release_date',
-                                      ascending=False).iloc[0:20]
+    newalbums.sort_values(by='release_date', ascending=False, inplace=True,
+                          kind='mergesort').iloc[0:20]
     albums = spotify_object.albums(newalbums['albumid'])['albums']
     data = pandas.DataFrame()
     for i in albums:
